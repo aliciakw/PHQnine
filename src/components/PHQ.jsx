@@ -38,7 +38,7 @@ var PHQ = React.createClass({
   render: function () {
     var quizContent;
     if(this.state.complete){
-      quizContent = <Result score={this.state.score}/>;
+      quizContent = <Result score={this.state.score} therapists={this.props.therapists}/>;
     } else {
       var currentQuestion = this.state.questions.length > 0 ? this.state.questions[this.state.position].text : "";
       quizContent = <Question text={currentQuestion} recordScore={this.recordScore} /> ;

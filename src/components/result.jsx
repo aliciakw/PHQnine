@@ -6,7 +6,7 @@ var Result = React.createClass({
   getInitialState: function () {
     return {
       result: "",
-      therapists: [],
+      therapists: this.props.therapists,
       followUp: false,
       followUpMsg: "Based on this information, we recommend speaking with a therapist. You can select one of the following:",
       scoreKey: {
@@ -30,9 +30,7 @@ var Result = React.createClass({
     } else {
       var therapists = [];
       $.get('/api/therapists', function (result) {
-        result.map(function(therapist){
-          therapists.push(therapist);
-        });
+        therapists = result;
       });
       this.setState({
         result: this.state.scoreKey[bracket],
@@ -42,20 +40,19 @@ var Result = React.createClass({
     }
   },
   choose: function (therapistId) {
-    console.log(therapistId + " was chosen");
     this.setState({
       followUpMessage: "Thank you for your selection"
     })
   },
   render: function () {
-    var followUpMsg = this.state.followUp ? this.state.followUpMsg : ""
-
+    var followUpMsg = this.state.followUp ? this.state.followUpMsg : "Thank you for filling out this questionnaire",
+        therapistsForm = this.state.followUp ? <TherapistForm docs={this.props.therapists} choose={this.choose}/> : "";
     return(
       <div className="results">
         <h5>The results of this questionnaire indicate:</h5>
         <h3>{this.state.result} depression</h3>
-        <h5>{followUpMsg}</h5>
-        <TherapistForm docs={this.state.therapists} choose={this.choose}/>
+        <h6>{followUpMsg}</h6>
+        {therapistsForm}
       </div>
     );
   }

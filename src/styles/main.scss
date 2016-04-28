@@ -1,8 +1,5 @@
-$background-color: #f7f7fa;
 $primary: #1C91D6;
 $secondary: #D4CE15;
-$footer-color: #7898AF;
-$border-color: #ebebee;
 $white: #fff;
 $primary-text-color: #1a1a1a;
 $secondary-text-color: #fff;
@@ -27,12 +24,7 @@ header {
   }
 }
 .results { text-align: center; padding: 10%; }
-footer {
-  height: 60px; margin-top:40px; text-align: center; background: $primary; border: 1px solid $primary;
-  p { color:$background-color; font-size: 11px; margin-top:20px;}
-  a {
-    color: mix($background-color, $footer-color); text-decoration: none;
-    -webkit-transition: opacity .5s ease-in-out; -moz-transition: color .25s ease-in-out; -o-transition: color .25s ease-in-out; -ms-transition: color .25s ease-in-out; transition: color .25s ease-in-out;
-    &:hover, &:active, &:focus { color:$secondary-text-color; }
-  }
-}
+.therapists {
+  text-align: left;
+  a { background: $secondary; padding: 2px 3px; margin: 10px;  font-size: 10px; font-weight: bold;}
+ }
