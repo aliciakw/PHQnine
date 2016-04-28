@@ -1,16 +1,23 @@
 import React from 'react';
 import $ from 'jquery';
-import Question from './question.jsx';
 import Result from './result.jsx';
+import Question from './question.jsx';
 
 var PHQ = React.createClass({
   getInitialState: function () {
-    return {
-      questions: this.props.questions,
-      position: 0,
-      score: 0,
-      complete: false
-    }
+      return {
+        questions: [],
+        position: 0,
+        score: 0,
+        complete: false
+      }
+  },
+  componentDidMount: function () {
+    this.serverRequest = $.get('/api/questions', function (data) {
+      this.setState({
+        questions: data
+      });
+    }.bind(this));
   },
   recordScore: function(value) {
     var score = this.state.score,
@@ -36,12 +43,11 @@ var PHQ = React.createClass({
     });
   },
   render: function () {
-    var quizContent;
+    var quizContent = "";
     if(this.state.complete){
-      quizContent = <Result score={this.state.score} therapists={this.props.therapists}/>;
-    } else {
-      var currentQuestion = this.state.questions.length > 0 ? this.state.questions[this.state.position].text : "";
-      quizContent = <Question text={currentQuestion} recordScore={this.recordScore} /> ;
+      quizContent = <Result score={this.state.score} />;
+    } else if (this.state.questions.length > 0) {
+      quizContent = <Question text={this.state.questions[this.state.position].text} recordScore={this.recordScore} /> ;
     }
     return(
       <section className="main">
