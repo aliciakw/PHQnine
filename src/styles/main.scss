@@ -1,19 +1,38 @@
 $background-color: #f7f7fa;
+$primary: #1C91D6;
+$secondary: #D4CE15;
 $footer-color: #7898AF;
 $border-color: #ebebee;
 $white: #fff;
-$primary-text-color: #333;
-$secondary-text-color: #666;
+$primary-text-color: #1a1a1a;
+$secondary-text-color: #fff;
 $font-stack: "Helvetica Neue", Helvetica, sans-serif;
 
-body { color: $secondary-text-color; background: $background-color; font: 100% $font-stack; margin: 0;}
+body { color: $primary-text-color; background: $primary; font: 100% $font-stack; margin: 0;}
 .container { margin: 20px 10%; }
+header {
+  color: $secondary-text-color; background: $primary; margin: 0; padding: 20px 20px 10px 20px; text-align: center;
+  h1 { margin: 0; }
+}
+.quiz { background: $white; }
+.question {
+  text-align: center;
+  h3 { margin: 0; padding: 10%; }
+}
+.quiz-button {
+  background: $primary; height:100px; text-align:center; text-align:center; color:$white; width: 25%; float:left;
+  span { margin: 10px; display: block;}
+  &:hover, &:active, &:focus { 
+    background: darken($primary, 3%);
+    -webkit-transition: color .5s ease-in-out; -moz-transition: color .25s ease-in-out; -o-transition: color .25s ease-in-out; -ms-transition: color .25s ease-in-out; transition: color .25s ease-in-out;
+  }
+}
 footer {
-  height: 60px; margin-top:40px; text-align: center; background: $footer-color; border: 1px solid darken($footer-color, 10%);
+  height: 60px; margin-top:40px; text-align: center; background: $primary; border: 1px solid $primary;
   p { color:$background-color; font-size: 11px; margin-top:20px;}
   a {
     color: mix($background-color, $footer-color); text-decoration: none;
     -webkit-transition: opacity .5s ease-in-out; -moz-transition: color .25s ease-in-out; -o-transition: color .25s ease-in-out; -ms-transition: color .25s ease-in-out; transition: color .25s ease-in-out;
     &:hover, &:active, &:focus { color:$secondary-text-color; }
   }
- }
+}
