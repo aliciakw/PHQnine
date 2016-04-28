@@ -5,43 +5,48 @@ import Result from './result.jsx';
 
 var PHQ = React.createClass({
   getInitialState: function () {
-    var data = this.props.data;
     return {
-      questions: data.questions,
+      questions: this.props.questions,
       position: 0,
       score: 0,
       complete: false
     }
   },
   recordScore: function(value) {
-    var questions = this.state.questions,
-        score = this.state.score,
+    var score = this.state.score,
         position = this.state.position;
-    questions[position].score = value;
+
+    //record answer
     this.setState({
-      questions: questions,
       score: score + parseInt(value)
     });
-    if(position + 1 < questions.length) {
+
+    // advance quiz
+    if(position < 8) {
       this.setState({
         position: position + 1,
       });
     } else {
-      console.log('quiz complete!');
       this.calcScore();
     }
   },
   calcScore: function () {
-    console.log(this.state.score);
+    this.setState({
+      complete: true
+    });
   },
   render: function () {
-    var currentQuestion = this.state.questions[this.state.position];
+    var quizContent;
+    if(this.state.complete){
+      quizContent = <Result score={this.state.score} therapists={this.props.therapists}/>;
+    } else {
+      var currentQuestion = this.state.questions.length > 0 ? this.state.questions[this.state.position].text : "";
+      quizContent = <Question text={currentQuestion} recordScore={this.recordScore} /> ;
+    }
     return(
-      <div>
-        <div className="quiz">
-          <Question text={currentQuestion.text} score={currentQuestion.score} recordScore={this.recordScore} />
-        </div>
-      </div>
+      <section className="main">
+        {quizContent}
+      </section>
     );
   }
 });

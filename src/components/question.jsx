@@ -1,6 +1,5 @@
 import React from 'react';
 import QuizButton from './quizButton.jsx';
-import PHQ from './PHQ.jsx';
 
 var Question = React.createClass({
   getInitialState: function () {
@@ -12,9 +11,6 @@ var Question = React.createClass({
         { label: "Nearly every day", value:3 }
       ]
     }
-  },
-  selectValue: function (value) {
-
   },
   render: function () {
     var _this = this;
